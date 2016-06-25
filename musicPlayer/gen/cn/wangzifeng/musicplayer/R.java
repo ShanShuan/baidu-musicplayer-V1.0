@@ -35,17 +35,19 @@ public final class R {
     }
     public static final class drawable {
         public static final int back=0x7f020000;
-        public static final int d=0x7f020001;
-        public static final int download=0x7f020002;
-        public static final int ic_launcher=0x7f020003;
-        public static final int item_bottom_text_color=0x7f020004;
-        public static final int movein=0x7f020005;
-        public static final int next=0x7f020006;
-        public static final int pause=0x7f020007;
-        public static final int pervious=0x7f020008;
-        public static final int play=0x7f020009;
-        public static final int playbackground=0x7f02000a;
-        public static final int search=0x7f02000b;
+        public static final int back1=0x7f020001;
+        public static final int d=0x7f020002;
+        public static final int download=0x7f020003;
+        public static final int download1=0x7f020004;
+        public static final int ic_launcher=0x7f020005;
+        public static final int item_bottom_text_color=0x7f020006;
+        public static final int movein=0x7f020007;
+        public static final int next=0x7f020008;
+        public static final int pause=0x7f020009;
+        public static final int pervious=0x7f02000a;
+        public static final int play=0x7f02000b;
+        public static final int playbackground=0x7f02000c;
+        public static final int search=0x7f02000d;
     }
     public static final class id {
         public static final int action_settings=0x7f0a0032;
@@ -57,7 +59,7 @@ public final class R {
         public static final int iv_back=0x7f0a000c;
         public static final int iv_display=0x7f0a0013;
         public static final int iv_next=0x7f0a0021;
-        public static final int iv_one_song_background=0x7f0a0005;
+        public static final int iv_one_song_background=0x7f0a0004;
         public static final int iv_one_song_next=0x7f0a0016;
         public static final int iv_one_song_pause_or_play=0x7f0a0015;
         public static final int iv_one_song_previous=0x7f0a0014;
@@ -65,14 +67,14 @@ public final class R {
         public static final int iv_pause_or_play=0x7f0a0020;
         public static final int iv_previous=0x7f0a001f;
         public static final int iv_removein=0x7f0a0000;
-        public static final int iv_search_song=0x7f0a0031;
+        public static final int iv_search_song=0x7f0a0030;
         public static final int iv_title=0x7f0a0029;
         public static final int ll_back=0x7f0a000d;
         public static final int ll_controller=0x7f0a001e;
         public static final int ll_one_song_controller=0x7f0a0012;
         public static final int ll_one_song_title=0x7f0a000b;
         public static final int local=0x7f0a002d;
-        public static final int lv_search_song=0x7f0a0030;
+        public static final int lv_search_song=0x7f0a0031;
         public static final int new_song_list=0x7f0a002e;
         public static final int radioGroup1=0x7f0a0018;
         public static final int rb_hot_music=0x7f0a001b;
@@ -92,7 +94,7 @@ public final class R {
         public static final int tv_move_in_time=0x7f0a0003;
         public static final int tv_movein_title=0x7f0a0001;
         public static final int tv_one_song_artistor=0x7f0a000f;
-        public static final int tv_one_song_background=0x7f0a0004;
+        public static final int tv_one_song_background=0x7f0a0005;
         public static final int tv_one_song_current_time=0x7f0a0006;
         public static final int tv_one_song_duration=0x7f0a0008;
         public static final int tv_one_song_name=0x7f0a000e;

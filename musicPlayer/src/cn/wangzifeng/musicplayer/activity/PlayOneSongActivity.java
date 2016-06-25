@@ -24,6 +24,7 @@ import android.widget.ImageView;
 import android.widget.SeekBar;
 import android.widget.SeekBar.OnSeekBarChangeListener;
 import android.widget.TextView;
+import android.widget.Toast;
 import cn.wangzifeng.musicplayer.R;
 import cn.wangzifeng.musicplayer.app.PlaySongApplication;
 import cn.wangzifeng.musicplayer.entity.GlobalConsts;
@@ -307,6 +308,11 @@ public class PlayOneSongActivity extends Activity implements OnClickListener {
 						s1.setUrls(url);
 						s1.setSongInfo(info);
 						String path = s1.getUrls().get(0).getShow_link();
+						if("".equals(path)||path==null){
+							
+							Toast.makeText(PlayOneSongActivity.this, "上一首 《"+s1.getTitle()+"》需会员才能听！请选择其他歌曲", Toast.LENGTH_SHORT).show();
+							return;
+						}
 						binder.playMusic(path);
 					}
 				});
@@ -321,6 +327,11 @@ public class PlayOneSongActivity extends Activity implements OnClickListener {
 						s.setUrls(url);
 						s.setSongInfo(info);
 						String path = s.getUrls().get(0).getShow_link();
+						if("".equals(path)||path==null){
+							
+							Toast.makeText(PlayOneSongActivity.this, "下一首 《"+s.getTitle()+"》需会员才能听！请选择其他歌曲", Toast.LENGTH_SHORT).show();
+							return;
+						}
 						binder.playMusic(path);
 					}
 				});
@@ -355,6 +366,13 @@ public class PlayOneSongActivity extends Activity implements OnClickListener {
 					s.setUrls(url);
 					s.setSongInfo(info);
 					String path = s.getUrls().get(0).getShow_link();
+					
+					
+					if("".equals(path)||path==null){
+					
+						Toast.makeText(PlayOneSongActivity.this, " 下一首  《"+s.getTitle()+"》需会员才能听！请选择其他歌曲", Toast.LENGTH_SHORT).show();
+						return;
+					}
 					binder.playMusic(path);
 				}
 			});
@@ -369,6 +387,11 @@ public class PlayOneSongActivity extends Activity implements OnClickListener {
 					s1.setUrls(url);
 					s1.setSongInfo(info);
 					String path = s1.getUrls().get(0).getShow_link();
+					if("".equals(path)||path==null){
+						
+						Toast.makeText(PlayOneSongActivity.this, "上一首 《"+s1.getTitle()+"》需会员才能听！请选择其他歌曲", Toast.LENGTH_SHORT).show();
+						return;
+					}
 					binder.playMusic(path);
 				}
 			});

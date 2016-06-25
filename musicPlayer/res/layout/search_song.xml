@@ -7,8 +7,9 @@
         android:id="@+id/et_search_song"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:layout_alignParentRight="true"
+        android:layout_toLeftOf="@+id/iv_search_song"
         android:ems="10"
+        android:layout_marginTop="10dp"
         android:hint="歌名，歌手，专辑" >
 
     </EditText>
@@ -24,9 +25,11 @@
 
     <ImageView
         android:id="@+id/iv_search_song"
-        android:layout_width="40dp"
+        android:layout_width="70dp"
         android:layout_height="40dp"
-        android:padding="6dp"
+        android:paddingRight="15dp"
+        android:paddingLeft="15dp"
+        android:layout_marginTop="10dp"
         android:layout_alignBottom="@+id/et_search_song"
         android:layout_alignParentRight="true"
         android:layout_alignParentTop="true"

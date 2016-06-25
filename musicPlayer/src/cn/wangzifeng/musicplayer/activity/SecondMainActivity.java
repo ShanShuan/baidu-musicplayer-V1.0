@@ -32,6 +32,7 @@ import android.view.animation.TranslateAnimation;
 import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.Toast;
 import android.widget.RadioGroup.OnCheckedChangeListener;
 import android.widget.RelativeLayout;
 import cn.wangzifeng.musicplayer.R;
@@ -75,6 +76,7 @@ public class SecondMainActivity extends FragmentActivity {
 	protected int p;
 	private SongMolde molde;
 	protected RotateAnimation animation=null;
+	protected Song s;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -255,8 +257,8 @@ public class SecondMainActivity extends FragmentActivity {
 
 			@Override
 			public void onClick(View v) {
-				app.next();
-				final Song s = app.getSongs().get(app.getPosition());
+					app.next();
+				 s = app.getSongs().get(app.getPosition());
 				molde.getSongInfoBySongId(s.getSong_id(),
 						new SongInfoCallback() {
 
@@ -266,7 +268,11 @@ public class SecondMainActivity extends FragmentActivity {
 								s.setUrls(url);
 								s.setSongInfo(info);
 								String path = s.getUrls().get(0).getShow_link();
+								if(path!=null||!("".equals(path))){
 								songBinder.playMusic(path);
+								}else{
+									Toast.makeText(SecondMainActivity.this, "这首"+s.getTitle()+"需会员才能听！请选择其他歌曲", Toast.LENGTH_SHORT).show();
+								}
 							}
 						});
 			}
@@ -275,8 +281,8 @@ public class SecondMainActivity extends FragmentActivity {
 
 			@Override
 			public void onClick(View v) {
-				app.previous();
-				final Song s = app.getSongs().get(app.getPosition());
+					app.previous();
+					final Song s = app.getSongs().get(app.getPosition());
 				molde.getSongInfoBySongId(s.getSong_id(),
 						new SongInfoCallback() {
 
@@ -286,11 +292,16 @@ public class SecondMainActivity extends FragmentActivity {
 								s.setUrls(url);
 								s.setSongInfo(info);
 								String path = s.getUrls().get(0).getShow_link();
+								if(path!=null||!("".equals(path))){
 								songBinder.playMusic(path);
+								}else{
+									Toast.makeText(SecondMainActivity.this, "这首"+s.getTitle()+"需会员才能听！请选择其他歌曲", Toast.LENGTH_SHORT).show();
+								}
 							}
 						});
 			}
 		});
+		
 		ivPlayorPause.setOnClickListener(new OnClickListener() {
 
 			@Override
