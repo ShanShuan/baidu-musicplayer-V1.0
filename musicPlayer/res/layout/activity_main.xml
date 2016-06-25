@@ -1,0 +1,41 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+    <ImageView 
+        android:id="@+id/iv_removein"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:src="@drawable/movein"
+        android:scaleType="centerCrop"/>
+    <TextView 
+        android:id="@+id/tv_movein_title"
+        android:layout_marginTop="5dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="音乐让你更加执着和专注"
+        android:gravity="center"
+        />
+    <Button 
+        android:id="@+id/btn_slip"
+        android:text="跳过"
+		android:layout_marginRight="20dp"
+		android:layout_marginTop="20dp"
+        android:textSize="12sp"
+        android:background="@null"
+        android:layout_alignParentRight="true"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:gravity="center"/>
+    <TextView 
+        android:gravity="center"
+        android:id="@+id/tv_move_in_time"
+        android:text="5秒"
+        android:textSize="15sp"
+        android:layout_alignTop="@+id/btn_slip"
+        android:layout_toLeftOf="@+id/btn_slip"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        />
+
+</RelativeLayout>
