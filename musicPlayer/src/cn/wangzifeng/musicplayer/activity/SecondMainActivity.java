@@ -104,9 +104,11 @@ public class SecondMainActivity extends FragmentActivity {
 			public void onServiceConnected(ComponentName name, IBinder service) {
 				songBinder = (SongBinder) service;
 				NewSongFragment f = (NewSongFragment) fragments.get(1);
+				HotMusicFragment h=(HotMusicFragment) fragments.get(2);
 				SearchSongFragment s=(SearchSongFragment) fragments.get(3);
 				s.setSongBinder(songBinder);
 				f.setSongBinder(songBinder);
+				h.setSongBinder(songBinder);
 			}
 		};
 		int flags = Service.BIND_AUTO_CREATE;
@@ -128,7 +130,6 @@ public class SecondMainActivity extends FragmentActivity {
 
 	@Override
 	protected void onPause() {
-		// TODO Auto-generated method stub
 		super.onPause();
 	}
 	@Override
@@ -246,6 +247,7 @@ public class SecondMainActivity extends FragmentActivity {
 			}
 		};
 		vp.setAdapter(fragmentPagerAdapter);
+		vp.setOffscreenPageLimit(4);
 
 	}
 

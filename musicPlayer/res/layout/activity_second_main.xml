@@ -54,38 +54,41 @@
             android:layout_height="50dp"
             android:layout_weight="1"
             android:button="@null"
-            android:text="收索音乐"
+            android:text="搜索音乐"
             android:textColor="@drawable/item_bottom_text_color" />
     </RadioGroup>
 
     <RelativeLayout
         android:id="@+id/rl_controller"
         android:layout_width="match_parent"
-        android:layout_height="40dp"
+        android:layout_height="60dp"
         android:layout_above="@+id/radioGroup1"
         android:layout_alignParentLeft="true"
         android:background="#77555555"
         android:visibility="invisible" >
         <cn.wangzifeng.musicplayer.ui.CircleImageView 
             android:id="@+id/iv_display"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_marginLeft="10dp"
             android:src="@drawable/ic_launcher"
             />
         <LinearLayout 
             android:id="@+id/ll_controller"
             android:layout_width="match_parent"
-            android:layout_height="40dp"
+            android:layout_height="60dp"
             android:layout_toRightOf="@+id/iv_display"
             android:orientation="horizontal"
             >
-            <ImageView 
+
+            <ImageView
                 android:id="@+id/iv_previous"
-                android:layout_weight="1"
                 android:layout_width="0dp"
-                android:layout_marginTop="5dp"
-                android:layout_height="30dp"
-                android:src="@drawable/pervious"/>
+                android:layout_height="65dp"
+                android:padding="7dp"
+                android:layout_weight="0.93"
+                android:src="@drawable/pervious" />
+
             <ImageView 
                 android:id="@+id/iv_pause_or_play"
                 android:layout_weight="1"
@@ -96,8 +99,8 @@
                 android:id="@+id/iv_next"
                 android:layout_weight="1"
                 android:layout_width="0dp"
-                      android:layout_marginTop="5dp"
-                android:layout_height="30dp"
+                android:padding="7dp"
+                android:layout_height="60dp"
                 android:src="@drawable/next"/>
         </LinearLayout>
 

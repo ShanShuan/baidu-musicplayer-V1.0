@@ -127,6 +127,42 @@ public class SongMolde {
 		 task.execute();
 
 	}
+	/**
+	 * 查找从 soffset开始的size个HotSong 
+	 * @param callback
+	 * @param offset
+	 * @param size
+	 */
+	public  void findHotSong(final CallBack callback,final int offset,final int size){
+		 AsyncTask<String, String, List<Song>> task=new AsyncTask<String, String, List<Song>>(){
+
+			@Override
+			protected List<Song> doInBackground(String... params) {
+				String path=UrlFactory.getHotMusicUrl(offset, size);
+				Log.i("hoturl", path);
+				try {
+					InputStream is = HttpUrlUtil.getInputStream(path);
+					List<Song> songs=XmlParser.parseSongList(is);
+					if(songs==null){
+						return null;
+					}
+					return songs;
+				} catch (IOException e) {
+					e.printStackTrace();
+				} catch (XmlPullParserException e) {
+					e.printStackTrace();
+				}
+				return null;
+			}
+			@Override
+			protected void onPostExecute(List<Song> result) {
+				callback.onSonglistLoaded(result);
+			}
+			 
+		 };
+		 task.execute();
+
+	}
 	public interface CallBack{
 		public void onSonglistLoaded(List<Song> songs);
 	}

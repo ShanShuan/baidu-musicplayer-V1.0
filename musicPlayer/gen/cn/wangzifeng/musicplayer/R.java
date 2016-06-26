@@ -50,12 +50,13 @@ public final class R {
         public static final int search=0x7f02000d;
     }
     public static final class id {
-        public static final int action_settings=0x7f0a0032;
+        public static final int action_settings=0x7f0a0033;
         public static final int btn_slip=0x7f0a0002;
-        public static final int et_search_song=0x7f0a002f;
+        public static final int et_search_song=0x7f0a0030;
+        public static final int hot_song_list=0x7f0a0022;
         public static final int ivDownload=0x7f0a0010;
-        public static final int ivPic=0x7f0a0022;
-        public static final int ivSearchPic=0x7f0a0025;
+        public static final int ivPic=0x7f0a0023;
+        public static final int ivSearchPic=0x7f0a0026;
         public static final int iv_back=0x7f0a000c;
         public static final int iv_display=0x7f0a0013;
         public static final int iv_next=0x7f0a0021;
@@ -67,15 +68,15 @@ public final class R {
         public static final int iv_pause_or_play=0x7f0a0020;
         public static final int iv_previous=0x7f0a001f;
         public static final int iv_removein=0x7f0a0000;
-        public static final int iv_search_song=0x7f0a0030;
-        public static final int iv_title=0x7f0a0029;
+        public static final int iv_search_song=0x7f0a0031;
+        public static final int iv_title=0x7f0a002a;
         public static final int ll_back=0x7f0a000d;
         public static final int ll_controller=0x7f0a001e;
         public static final int ll_one_song_controller=0x7f0a0012;
         public static final int ll_one_song_title=0x7f0a000b;
-        public static final int local=0x7f0a002d;
-        public static final int lv_search_song=0x7f0a0031;
-        public static final int new_song_list=0x7f0a002e;
+        public static final int local=0x7f0a002e;
+        public static final int lv_search_song=0x7f0a0032;
+        public static final int new_song_list=0x7f0a002f;
         public static final int radioGroup1=0x7f0a0018;
         public static final int rb_hot_music=0x7f0a001b;
         public static final int rb_local_music=0x7f0a0019;
@@ -84,13 +85,13 @@ public final class R {
         public static final int rl_controller=0x7f0a001d;
         public static final int rl_one_song_controller=0x7f0a0011;
         public static final int seekBar1=0x7f0a0007;
-        public static final int tvName=0x7f0a0023;
-        public static final int tvSearchName=0x7f0a0026;
-        public static final int tvSearchSinger=0x7f0a0027;
-        public static final int tvSinger=0x7f0a0024;
-        public static final int tv_album=0x7f0a002b;
-        public static final int tv_artist=0x7f0a002c;
-        public static final int tv_duration=0x7f0a002a;
+        public static final int tvName=0x7f0a0024;
+        public static final int tvSearchName=0x7f0a0027;
+        public static final int tvSearchSinger=0x7f0a0028;
+        public static final int tvSinger=0x7f0a0025;
+        public static final int tv_album=0x7f0a002c;
+        public static final int tv_artist=0x7f0a002d;
+        public static final int tv_duration=0x7f0a002b;
         public static final int tv_move_in_time=0x7f0a0003;
         public static final int tv_movein_title=0x7f0a0001;
         public static final int tv_one_song_artistor=0x7f0a000f;
@@ -99,19 +100,20 @@ public final class R {
         public static final int tv_one_song_duration=0x7f0a0008;
         public static final int tv_one_song_name=0x7f0a000e;
         public static final int tv_one_song_srl=0x7f0a000a;
-        public static final int tv_title=0x7f0a0028;
+        public static final int tv_title=0x7f0a0029;
         public static final int vp=0x7f0a0017;
     }
     public static final class layout {
         public static final int activity_main=0x7f030000;
         public static final int activity_play_one_song=0x7f030001;
         public static final int activity_second_main=0x7f030002;
-        public static final int item_lv_music=0x7f030003;
-        public static final int item_lv_search_song=0x7f030004;
-        public static final int item_music=0x7f030005;
-        public static final int local=0x7f030006;
-        public static final int new_song=0x7f030007;
-        public static final int search_song=0x7f030008;
+        public static final int hot_song=0x7f030003;
+        public static final int item_lv_music=0x7f030004;
+        public static final int item_lv_search_song=0x7f030005;
+        public static final int item_music=0x7f030006;
+        public static final int local=0x7f030007;
+        public static final int new_song=0x7f030008;
+        public static final int search_song=0x7f030009;
     }
     public static final class menu {
         public static final int main=0x7f090000;

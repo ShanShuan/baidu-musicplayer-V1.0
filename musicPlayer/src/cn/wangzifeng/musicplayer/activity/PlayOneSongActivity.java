@@ -157,7 +157,7 @@ public class PlayOneSongActivity extends Activity implements OnClickListener {
 				// 加载歌词
 				Song s = app.getSongs().get(app.getPosition());
 				String lrc = s.getSongInfo().getLrclink();
-				Log.i("123", "开始加载歌词");
+//				Log.i("123", "开始加载歌词");
 				molde.downLoadLrc(PlayOneSongActivity.this, lrc,
 						new LrcCallBack() {
 

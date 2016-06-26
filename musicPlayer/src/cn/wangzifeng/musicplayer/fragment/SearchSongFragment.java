@@ -72,7 +72,7 @@ public class SearchSongFragment extends Fragment{
 						String musicpath=url.getShow_link();
 						Log.i("show lick", musicpath);
 						if(musicpath==null||"".equals(musicpath)){
-							Toast.makeText(getActivity(), "百度接口提供的数据发生错误，坑啊!", Toast.LENGTH_SHORT).show();
+							Toast.makeText(getActivity(), "这首"+s.getTitle()+"需要会员才能听，坑啊!", Toast.LENGTH_SHORT).show();
 							return;
 						}
 						//开始播放音乐
@@ -115,7 +115,7 @@ public class SearchSongFragment extends Fragment{
 				if(s.length()>0){
 				iv.setVisibility(View.VISIBLE);
 				}else{
-					iv.setVisibility(View.INVISIBLE);
+					iv.setVisibility(View.GONE);
 				}
 			}
 			

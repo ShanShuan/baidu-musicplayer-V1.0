@@ -34,4 +34,7 @@ public class UrlFactory {
 		}
 		return null;
 	}
+	public static String getHotMusicUrl(int offset, int size) {
+		return "http://tingapi.ting.baidu.com/v1/restserver/ting?from=qianqian&version=2.1.0&method=baidu.ting.billboard.billList&format=xml&type=2&offset="+offset+"&size="+size; 
+	}
 }

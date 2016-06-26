@@ -46,8 +46,7 @@ public class NewSongFragment extends Fragment{
 			@Override
 			public void onSonglistLoaded(List<Song> songs) {
 				NewSongFragment.this.songs=songs;
-				app=(PlaySongApplication) getActivity().getApplication();
-				app.setSongs(songs);
+				
 				setadapter(songs);
 			}
 		}, 0, 20);
@@ -107,7 +106,8 @@ public class NewSongFragment extends Fragment{
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view,
 					int position, long id) {
-				
+				app=(PlaySongApplication) getActivity().getApplication();
+				app.setSongs(songs);
 				if(app.getPosition()==position){
 					if(songBinder.isPlaying()){
 						songBinder.stop();
