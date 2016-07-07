@@ -3,10 +3,13 @@ package cn.wangzifeng.musicplayer.activity;
 import java.util.List;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.app.AlertDialog.Builder;
 import android.app.Service;
 import android.content.BroadcastReceiver;
 import android.content.ComponentName;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.ServiceConnection;
@@ -35,6 +38,7 @@ import cn.wangzifeng.musicplayer.entity.SongUrl;
 import cn.wangzifeng.musicplayer.modler.SongMolde;
 import cn.wangzifeng.musicplayer.modler.SongMolde.LrcCallBack;
 import cn.wangzifeng.musicplayer.modler.SongMolde.SongInfoCallback;
+import cn.wangzifeng.musicplayer.service.DownLoadSongServiece;
 import cn.wangzifeng.musicplayer.service.PlaySongService;
 import cn.wangzifeng.musicplayer.service.PlaySongService.SongBinder;
 import cn.wangzifeng.musicplayer.util.BitmapUtils;
@@ -63,7 +67,8 @@ public class PlayOneSongActivity extends Activity implements OnClickListener {
 	private ImageView ivNext;
 	private boolean ivSingerIsChecked=false;
 	private float x;
-
+	private ImageView ivDownload;
+	protected List<Song> songs;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -86,6 +91,34 @@ public class PlayOneSongActivity extends Activity implements OnClickListener {
 	
 
 	private void setListenners() {
+		//点击下载按钮的监听事件
+		ivDownload.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				songs=app.getSongs();
+//				position=app.getPosition();
+				final Song s=songs.get(position);
+				AlertDialog.Builder builder=new Builder(PlayOneSongActivity.this);
+				builder.setMessage("下载音乐").setTitle("请确认接入wifi")
+				.setPositiveButton("", new DialogInterface.OnClickListener() {
+					
+					@Override
+					public void onClick(DialogInterface dialog, int which) {
+						String fileLink=s.getUrls().get(0).getShow_link();
+						Intent intent=new Intent(PlayOneSongActivity.this, DownLoadSongServiece.class);
+						intent.putExtra("fileLink", fileLink);
+						intent.putExtra("title", s.getTitle());
+						intent.putExtra("bit", s.getUrls().get(0).getFile_bitrate());
+						startService(intent);
+						dialog.cancel();
+					}
+				})
+				.setNegativeButton("取消", null).create().show();
+			}
+		});
+		
+		//seekpar 监听 实现拖拽 跳到播放音乐
 		sb.setOnSeekBarChangeListener(new OnSeekBarChangeListener() {
 
 			@Override
@@ -264,6 +297,7 @@ public class PlayOneSongActivity extends Activity implements OnClickListener {
 		tvScl = (TextView) findViewById(R.id.tv_one_song_srl);
 		ivSinger = (ImageView) findViewById(R.id.iv_one_song_singer);
 		ivBackground = (ImageView) findViewById(R.id.iv_one_song_background);
+		ivDownload=(ImageView) findViewById(R.id.ivDownload);
 	}
 
 	@Override

@@ -39,6 +39,7 @@
             android:name="cn.wangzifeng.musicplayer.activity.PlayOneSongActivity"
             android:label="@string/title_activity_play_one_song" >
         </activity>
+        <service android:name="cn.wangzifeng.musicplayer.service.DownLoadSongServiece"></service>
     </application>
 
 </manifest>
