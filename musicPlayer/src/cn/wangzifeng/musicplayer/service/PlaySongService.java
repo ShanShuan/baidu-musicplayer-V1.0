@@ -1,6 +1,7 @@
 package cn.wangzifeng.musicplayer.service;
 
 import java.io.IOException;
+import java.util.List;
 
 import android.app.Service;
 import android.content.Intent;
@@ -9,13 +10,21 @@ import android.media.MediaPlayer.OnCompletionListener;
 import android.media.MediaPlayer.OnPreparedListener;
 import android.os.Binder;
 import android.os.IBinder;
+import android.util.Log;
+import android.widget.Toast;
+import cn.wangzifeng.musicplayer.app.PlaySongApplication;
 import cn.wangzifeng.musicplayer.entity.GlobalConsts;
+import cn.wangzifeng.musicplayer.entity.Song;
+import cn.wangzifeng.musicplayer.entity.SongInfo;
+import cn.wangzifeng.musicplayer.entity.SongUrl;
+import cn.wangzifeng.musicplayer.modler.SongMolde;
 public class PlaySongService extends Service{
 
 	private MediaPlayer player;
 	private boolean isLoop=true;
 	private boolean isPlayed=false;
-	
+	protected PlaySongApplication app;
+	private String musicpath;
 
 	@Override
 	public void onCreate() {
@@ -37,8 +46,46 @@ public class PlaySongService extends Service{
 			
 			@Override
 			public void onCompletion(MediaPlayer mp) {
-				//TODO
 				
+				try {
+					app=PlaySongApplication.getContext();
+					app.next();
+					final Song s=app.getSongs().get(app.getPosition());
+					String song_id=s.getSong_id();
+					SongMolde molde=new SongMolde();
+					molde.getSongInfoBySongId(song_id, new SongMolde.SongInfoCallback() {
+						
+
+						public void onSongInfoLoaded(List<SongUrl> urls,SongInfo info) {
+							//判断获取到的数据是否是null 
+							if(urls == null || info==null){
+								return;
+							}
+							//开始准备播放                                    音乐
+							s.setUrls(urls);
+							s.setSongInfo(info);
+							//获取当前需要播放的音乐的路径
+							SongUrl url =urls.get(0);
+							 musicpath=url.getShow_link();
+							 Log.i("musicPath", musicpath);
+						}
+					});
+					
+			
+					player.reset();
+					player.setDataSource(musicpath);
+					player.prepareAsync();
+				} catch (IllegalArgumentException e) {
+					e.printStackTrace();
+				} catch (SecurityException e) {
+					e.printStackTrace();
+				} catch (IllegalStateException e) {
+					e.printStackTrace();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+				//异步加载音乐信息
+			
 			}
 		});
 	}

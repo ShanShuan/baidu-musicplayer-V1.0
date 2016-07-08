@@ -34,12 +34,9 @@ public class SongMolde {
 					File file=new File(context.getCacheDir(),fileName);
 					List<LrcLine> lines=LrcUtils.parseLrc(file);
 					if(lines!=null){
-						Log.i("123", "文件中加载歌词");
-						Log.i("123", "文件中加载歌词："+lines.toString());
 						return lines;
 					}
 					InputStream in = HttpUrlUtil.getInputStream(path);
-					Log.i("123", "网络加载歌词");
 					return LrcUtils.parseLrc(in, file);
 					
 				} catch (IOException e) {

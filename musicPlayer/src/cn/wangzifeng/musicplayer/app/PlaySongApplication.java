@@ -3,15 +3,20 @@ package cn.wangzifeng.musicplayer.app;
 import java.util.List;
 
 import cn.wangzifeng.musicplayer.entity.LrcLine;
+import cn.wangzifeng.musicplayer.entity.Music;
 import cn.wangzifeng.musicplayer.entity.Song;
 
 import android.app.Application;
 
 public class PlaySongApplication extends Application{
 	private List<Song> songs;
+	private List<Music> musics;
 	private int position=-1;
 	private List<LrcLine> lines;
-	
+	public static  PlaySongApplication context;
+	public static PlaySongApplication getContext(){
+		return context;
+	}
 	public List<LrcLine> getLines() {
 		return lines;
 	}
@@ -32,6 +37,7 @@ public class PlaySongApplication extends Application{
 	}
 	@Override
 	public void onCreate() {
+		context=this;
 		super.onCreate();
 	}
 	public void next() {

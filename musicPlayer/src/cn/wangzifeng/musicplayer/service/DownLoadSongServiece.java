@@ -10,11 +10,23 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 
+import cn.wangzifeng.musicplayer.R;
+
+import android.annotation.SuppressLint;
 import android.app.IntentService;
+import android.app.Notification.Builder;
+import android.app.NotificationManager;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Environment;
 
+@SuppressLint("NewApi")
 public class DownLoadSongServiece extends IntentService{
+
+	private static final int id=1886714;
+	public DownLoadSongServiece(){
+		super("download");
+	}
 
 	public DownLoadSongServiece(String name) {
 		super(name);
@@ -30,10 +42,14 @@ public class DownLoadSongServiece extends IntentService{
 		File target=new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_MUSIC),fileName);
 		if(target.exists()){
 			return;
-		}else{
+		}
 			
+		if(!target.getParentFile().exists()){
+			target.getParentFile().mkdirs();
+		}
+		sendNofication("音乐开始下载",0,0,true);
 				FileOutputStream fos=new FileOutputStream(target);
-				sendNofication();
+			
 				URL url=new URL(fileLink);
 				HttpURLConnection conn=(HttpURLConnection) url.openConnection();
 				conn.setRequestMethod("GET");
@@ -46,12 +62,10 @@ public class DownLoadSongServiece extends IntentService{
 					fos.write(buffer, 0, length);
 					fos.flush();
 					current+=length;
-					sendNofication();
+					sendNofication("音乐下载中",total,current,false);
 				}
 				fos.close();
-				
-			
-		}
+				removeNotifycation("音乐下载完成");
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		} catch (MalformedURLException e) {
@@ -61,9 +75,20 @@ public class DownLoadSongServiece extends IntentService{
 		}
 	}
 
-	private void sendNofication() {
-		// TODO Auto-generated method stub
-		
+	private void removeNotifycation(String text) {
+		NotificationManager manager=(NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+		Builder builder=new Builder(this);
+		manager.cancel(id);
+		builder.setTicker(text).setContentInfo(text).setSmallIcon(R.drawable.download1);
+		manager.notify(id, builder.build());
+	}
+
+	private void sendNofication(String info,int max,int progress,boolean isUnsure) {
+		NotificationManager manager=(NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+		Builder builder=new Builder(this);
+		builder.setTicker(info).setContentInfo(info).setSmallIcon(R.drawable.download1)
+		.setProgress(max, progress, isUnsure);
+		manager.notify(id, builder.build());
 	}
 
 }

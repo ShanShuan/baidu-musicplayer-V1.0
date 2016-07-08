@@ -101,7 +101,7 @@ public class PlayOneSongActivity extends Activity implements OnClickListener {
 				final Song s=songs.get(position);
 				AlertDialog.Builder builder=new Builder(PlayOneSongActivity.this);
 				builder.setMessage("下载音乐").setTitle("请确认接入wifi")
-				.setPositiveButton("", new DialogInterface.OnClickListener() {
+				.setPositiveButton("确定", new DialogInterface.OnClickListener() {
 					
 					@Override
 					public void onClick(DialogInterface dialog, int which) {
