@@ -14,6 +14,7 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.ServiceConnection;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.support.v4.app.Fragment;
@@ -39,6 +40,7 @@ import cn.wangzifeng.musicplayer.R;
 import cn.wangzifeng.musicplayer.app.PlaySongApplication;
 import cn.wangzifeng.musicplayer.entity.GlobalConsts;
 import cn.wangzifeng.musicplayer.entity.LrcLine;
+import cn.wangzifeng.musicplayer.entity.Music;
 import cn.wangzifeng.musicplayer.entity.Song;
 import cn.wangzifeng.musicplayer.entity.SongInfo;
 import cn.wangzifeng.musicplayer.entity.SongUrl;
@@ -75,13 +77,19 @@ public class SecondMainActivity extends FragmentActivity {
 	private ServiceConnection conn;
 	protected int p;
 	private SongMolde molde;
-	protected RotateAnimation animation=null;
+	protected RotateAnimation animation = null;
 	protected Song s;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_second_main);
+		app=PlaySongApplication.getContext();
+		try {
+			app.removeSound();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		setViews();
 		setVp();
 		molde = new SongMolde();
@@ -104,11 +112,13 @@ public class SecondMainActivity extends FragmentActivity {
 			public void onServiceConnected(ComponentName name, IBinder service) {
 				songBinder = (SongBinder) service;
 				NewSongFragment f = (NewSongFragment) fragments.get(1);
-				HotMusicFragment h=(HotMusicFragment) fragments.get(2);
-				SearchSongFragment s=(SearchSongFragment) fragments.get(3);
+				HotMusicFragment h = (HotMusicFragment) fragments.get(2);
+				SearchSongFragment s = (SearchSongFragment) fragments.get(3);
+				LocalMusicFragment l = (LocalMusicFragment) fragments.get(0);
 				s.setSongBinder(songBinder);
 				f.setSongBinder(songBinder);
 				h.setSongBinder(songBinder);
+				l.setSongBinder(songBinder);
 			}
 		};
 		int flags = Service.BIND_AUTO_CREATE;
@@ -132,93 +142,113 @@ public class SecondMainActivity extends FragmentActivity {
 	protected void onPause() {
 		super.onPause();
 	}
+
 	@Override
 	public void onBackPressed() {
-		AlertDialog.Builder  b=new Builder(SecondMainActivity.this);
-		b.setTitle("提示信息").setMessage("你选择退出?还是后台播放?").setPositiveButton("后台",new DialogInterface.OnClickListener(){
+		AlertDialog.Builder b = new Builder(SecondMainActivity.this);
+		b.setTitle("提示信息").setMessage("你选择退出?还是后台播放?")
+				.setPositiveButton("后台", new DialogInterface.OnClickListener() {
 
-			@Override
-			public void onClick(DialogInterface dialog, int which) {
-				onPause();
-				
-			}}  ).setNegativeButton("退出", new DialogInterface.OnClickListener() {
-				
-				@Override
-				public void onClick(DialogInterface dialog, int which) {
-					finish();
-					
-				}
-			})
-		.create();
+					@Override
+					public void onClick(DialogInterface dialog, int which) {
+						onPause();
+
+					}
+				})
+				.setNegativeButton("退出", new DialogInterface.OnClickListener() {
+
+					@Override
+					public void onClick(DialogInterface dialog, int which) {
+						finish();
+
+					}
+				}).create();
 		b.show();
-		
+
 	}
-	
-	
+
 	/**
 	 * 广播接受类
 	 */
 	class MyBraodcast extends BroadcastReceiver {
 
-	
+		private boolean isLocalPlay;
 
 		@Override
 		public void onReceive(Context context, Intent intent) {
 			String action = intent.getAction();
+			app = (PlaySongApplication) getApplication();
+			isLocalPlay = app.isLocalPlay();
 			if (GlobalConsts.ACTION_START_PLAY.equals(action)) {
-				
-				// 开始播放音乐
-				if (rgController.getVisibility() == View.INVISIBLE) {
-					rgController.setVisibility(View.VISIBLE);
-					TranslateAnimation animation = new TranslateAnimation(
-							-rgController.getWidth(), 0, 0, 0);
-					animation.setDuration(1000);
-					LinearInterpolator i = new LinearInterpolator();
-					animation.setInterpolator(i);
-					rgController.startAnimation(animation);
-				}
-				
-				//下载歌词
-				app = (PlaySongApplication) getApplication();
-				Song s=app.getSongs().get(app.getPosition());
-				molde.downLoadLrc(SecondMainActivity.this, s.getSongInfo().getLrclink(), new LrcCallBack() {
-					
-					@Override
-					public void onLrcLoaded(List<LrcLine> lrcs) {
-						app.setLines(lrcs);
-						
+				if (!isLocalPlay) {
+					// 开始播放音乐
+					if (rgController.getVisibility() == View.INVISIBLE) {
+						rgController.setVisibility(View.VISIBLE);
+						TranslateAnimation animation = new TranslateAnimation(
+								-rgController.getWidth(), 0, 0, 0);
+						animation.setDuration(1000);
+						LinearInterpolator i = new LinearInterpolator();
+						animation.setInterpolator(i);
+						rgController.startAnimation(animation);
 					}
-				});
-				// 跟新ivDisplay
-				songs = app.getSongs();
-				String path = songs.get(app.getPosition()).getPic_small();
-				if(path==null||"".equals(path)){
-					ivDisplay.setImageResource(R.drawable.ic_launcher);
-					return;
-				}
-				BitmapUtils.loadBitmap(context, path, new BitmapCallback() {
 
-					@Override
-					public void onBitmapLoaded(Bitmap bitmap) {
-						ivDisplay.setImageBitmap(bitmap);
-						
+					// 下载歌词
+
+					Song s = app.getSongs().get(app.getPosition());
+					if(s.getSongInfo()!=null){
+					molde.downLoadLrc(SecondMainActivity.this, s.getSongInfo()
+							.getLrclink(), new LrcCallBack() {
+
+						@Override
+						public void onLrcLoaded(List<LrcLine> lrcs) {
+							app.setLines(lrcs);
+						}
+					});
 					}
-				},50,50);
+					// 跟新ivDisplay
+					songs = app.getSongs();
+					String path = songs.get(app.getPosition()).getPic_small();
+					if (path == null || "".equals(path)) {
+						ivDisplay.setImageResource(R.drawable.ic_launcher);
+						return;
+					}
+					BitmapUtils.loadBitmap(context, path, new BitmapCallback() {
 
-			}else if(GlobalConsts.ACTION_STOP_PLAY.equals(action)){
+						@Override
+						public void onBitmapLoaded(Bitmap bitmap) {
+							ivDisplay.setImageBitmap(bitmap);
+
+						}
+					}, 50, 50);
+				} else {
+					// TODO 本地播放
+					if (rgController.getVisibility() == View.INVISIBLE) {
+						rgController.setVisibility(View.VISIBLE);
+					}
+					// 跟新ivDisplay
+					Music m=app.getMusics().get(app.getPosition());
+					if(m.getAlbumArt()==null){
+						ivDisplay.setImageResource(R.drawable.girl);
+					}else{
+						Bitmap bm=BitmapFactory.decodeFile(m.getAlbumArt());
+						ivDisplay.setImageBitmap(bm);
+					}
+				}
+
+			} else if (GlobalConsts.ACTION_STOP_PLAY.equals(action)) {
 				ivDisplay.clearAnimation();
-				animation=null;
-			}else if(GlobalConsts.ACTION_UPDATE_PROGRESS.equals(action)){
-				if(animation==null){
-				animation = new RotateAnimation(0, 359,
-						ivDisplay.getWidth() / 2,
-						ivDisplay.getHeight() / 2);
-				animation.setDuration(5000);
-				animation.setRepeatCount(-1);
-				LinearInterpolator i = new LinearInterpolator();
-				animation.setInterpolator(i);
-				ivDisplay.startAnimation(animation);
-			}
+				animation = null;
+			} else if (GlobalConsts.ACTION_UPDATE_PROGRESS.equals(action)) {
+					if (animation == null) {
+						animation = new RotateAnimation(0, 359,
+								ivDisplay.getWidth() / 2,
+								ivDisplay.getHeight() / 2);
+						animation.setDuration(5000);
+						animation.setRepeatCount(-1);
+						LinearInterpolator i = new LinearInterpolator();
+						animation.setInterpolator(i);
+						ivDisplay.startAnimation(animation);
+					}
 			}
 		}
 
@@ -259,8 +289,9 @@ public class SecondMainActivity extends FragmentActivity {
 
 			@Override
 			public void onClick(View v) {
-					app.next();
-				 s = app.getSongs().get(app.getPosition());
+				app.next();
+				if(!app.isLocalPlay()){//不是播放本地音乐
+				s = app.getSongs().get(app.getPosition());
 				molde.getSongInfoBySongId(s.getSong_id(),
 						new SongInfoCallback() {
 
@@ -270,21 +301,30 @@ public class SecondMainActivity extends FragmentActivity {
 								s.setUrls(url);
 								s.setSongInfo(info);
 								String path = s.getUrls().get(0).getShow_link();
-								if(path!=null||!("".equals(path))){
-								songBinder.playMusic(path);
-								}else{
-									Toast.makeText(SecondMainActivity.this, "这首"+s.getTitle()+"需会员才能听！请选择其他歌曲", Toast.LENGTH_SHORT).show();
+								if (path != null || !("".equals(path))) {
+									songBinder.playMusic(path);
+								} else {
+									Toast.makeText(
+											SecondMainActivity.this,
+											"这首" + s.getTitle()
+													+ "需会员才能听！请选择其他歌曲",
+											Toast.LENGTH_SHORT).show();
 								}
 							}
 						});
+			}else{//播放本地音乐
+				Music m=app.getMusics().get(app.getPosition());
+				songBinder.playMusic(m.getPath());
+			}
 			}
 		});
 		ivpervious.setOnClickListener(new OnClickListener() {
 
 			@Override
 			public void onClick(View v) {
-					app.previous();
-					final Song s = app.getSongs().get(app.getPosition());
+				app.previous();
+				if(!app.isLocalPlay()){//不是播放本地音乐
+				final Song s = app.getSongs().get(app.getPosition());
 				molde.getSongInfoBySongId(s.getSong_id(),
 						new SongInfoCallback() {
 
@@ -294,16 +334,25 @@ public class SecondMainActivity extends FragmentActivity {
 								s.setUrls(url);
 								s.setSongInfo(info);
 								String path = s.getUrls().get(0).getShow_link();
-								if(path!=null||!("".equals(path))){
-								songBinder.playMusic(path);
-								}else{
-									Toast.makeText(SecondMainActivity.this, "这首"+s.getTitle()+"需会员才能听！请选择其他歌曲", Toast.LENGTH_SHORT).show();
+								if (path != null || !("".equals(path))) {
+									songBinder.playMusic(path);
+								} else {
+									Toast.makeText(
+											SecondMainActivity.this,
+											"这首" + s.getTitle()
+													+ "需会员才能听！请选择其他歌曲",
+											Toast.LENGTH_SHORT).show();
 								}
 							}
+							
 						});
+			}else{//播放本地音乐
+				Music m=app.getMusics().get(app.getPosition());
+				songBinder.playMusic(m.getPath());
+			}
 			}
 		});
-		
+
 		ivPlayorPause.setOnClickListener(new OnClickListener() {
 
 			@Override

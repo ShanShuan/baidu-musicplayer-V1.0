@@ -1,41 +1,42 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent" >
-    <ImageView 
+    android:layout_height="match_parent" 
+    android:background="#ffffff"
+    android:id="@+id/rl">
+
+    <ImageView
         android:id="@+id/iv_removein"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:src="@drawable/movein"
-        android:scaleType="centerCrop"/>
-    <TextView 
+        android:scaleType="centerInside"
+        android:src="@drawable/comin" />
+
+    <TextView
         android:id="@+id/tv_movein_title"
-        android:layout_marginTop="5dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="音乐让你更加执着和专注"
-        android:gravity="center"
-        />
-    <Button 
+        android:layout_marginTop="5dp"
+        android:gravity="center" />
+
+    <Button
         android:id="@+id/btn_slip"
-        android:text="跳过"
-		android:layout_marginRight="20dp"
-		android:layout_marginTop="20dp"
-        android:textSize="12sp"
-        android:background="@null"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:gravity="center"/>
-    <TextView 
+        android:layout_below="@+id/tv_movein_title"
+        android:layout_marginRight="12dp"
+        android:background="@null"
         android:gravity="center"
-        android:id="@+id/tv_move_in_time"
-        android:text="5秒"
-        android:textSize="15sp"
-        android:layout_alignTop="@+id/btn_slip"
-        android:layout_toLeftOf="@+id/btn_slip"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        />
+        android:text="因为音乐   所以专注\n浮躁的世界，安静地听自己的歌"
+        android:textSize="12sp" />
+
+    <ImageView
+        android:id="@+id/moving"
+        android:layout_width="110dp"
+        android:layout_height="110dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="23dp"
+        android:src="@drawable/danche" />
 
 </RelativeLayout>

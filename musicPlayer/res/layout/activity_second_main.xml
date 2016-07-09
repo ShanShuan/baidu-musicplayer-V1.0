@@ -65,13 +65,13 @@
         android:layout_above="@+id/radioGroup1"
         android:layout_alignParentLeft="true"
         android:background="#77555555"
-        android:visibility="invisible" >
+      android:visibility="invisible" >
         <cn.wangzifeng.musicplayer.ui.CircleImageView 
             android:id="@+id/iv_display"
             android:layout_width="60dp"
             android:layout_height="60dp"
-            android:layout_marginLeft="10dp"
-            android:src="@drawable/ic_launcher"
+            android:paddingLeft="3dp"
+            android:src="@drawable/girl"
             />
         <LinearLayout 
             android:id="@+id/ll_controller"
@@ -87,7 +87,7 @@
                 android:layout_height="65dp"
                 android:padding="7dp"
                 android:layout_weight="0.93"
-                android:src="@drawable/pervious" />
+                android:src="@drawable/pervious"/>
 
             <ImageView 
                 android:id="@+id/iv_pause_or_play"

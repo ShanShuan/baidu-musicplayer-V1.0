@@ -8,6 +8,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.net.Uri;
 import android.provider.MediaStore;
+import android.util.Log;
 
 
 import cn.wangzifeng.musicplayer.entity.Music;
@@ -66,6 +67,7 @@ public class MediaStoreDao implements IDao<Music>{
 			music.setAlbumArt(getAlbumArtByKey(music.getAlbumKey()));
 			musics.add(music);
 		}
+		Log.i("musics", musics.toString());
 		return musics;
 	}
 	public String getAlbumArtByKey(String albumKey){

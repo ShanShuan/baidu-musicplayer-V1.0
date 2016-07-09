@@ -3,14 +3,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent" >
 
-
     <ImageView
         android:id="@+id/iv_one_song_background"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:scaleType="fitXY"
-        android:src="@drawable/movein" />
-    
+        android:scaleType="centerCrop"
+        android:src="@drawable/fire" />
+
     <TextView
         android:id="@+id/tv_one_song_background"
         android:layout_width="match_parent"
@@ -18,7 +17,7 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
-        android:background="#88444444" />
+        android:background="#bb444444" />
 
     <TextView
         android:id="@+id/tv_one_song_current_time"
@@ -26,15 +25,9 @@
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_below="@+id/seekBar1"
-        android:text="00:00" />
-
-    <TextView
-        android:id="@+id/tv_one_song_duration"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/seekBar1"
-        android:layout_toRightOf="@+id/iv_one_song_singer"
-        android:text="03:14" />
+        android:layout_marginLeft="15dp"
+        android:text="00:00"
+        android:textColor="#87a412" />
 
     <SeekBar
         android:id="@+id/seekBar1"
@@ -52,9 +45,8 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="60dp"
         android:lines="2"
-        android:text="歌词加载中，或者歌词不存在"
-        android:textColor="#ffffff"
-		/>
+        android:text="-------"
+        android:textColor="#ffffff" />
 
     <LinearLayout
         android:id="@+id/ll_one_song_title"
@@ -75,8 +67,8 @@
             android:id="@+id/ll_back"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:orientation="vertical" 
-            android:layout_weight="1">
+            android:layout_weight="1"
+            android:orientation="vertical" >
 
             <TextView
                 android:id="@+id/tv_one_song_name"
@@ -84,8 +76,8 @@
                 android:layout_height="21dp"
                 android:layout_marginLeft="8dp"
                 android:text="歌名"
-                android:textColor="#ffffff"
                 android:textAppearance="?android:attr/textAppearanceLarge"
+                android:textColor="#ffffff"
                 android:textSize="15sp" />
 
             <TextView
@@ -105,7 +97,6 @@
             android:paddingLeft="20dp"
             android:paddingRight="20dp"
             android:src="@drawable/download1" />
-
     </LinearLayout>
 
     <cn.wangzifeng.musicplayer.ui.CircleImageView
@@ -115,7 +106,7 @@
         android:layout_below="@+id/ll_one_song_title"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="96dp"
-        android:src="@drawable/ic_launcher" />
+        android:src="@drawable/chenbolin" />
 
     <RelativeLayout
         android:id="@+id/rl_one_song_controller"
@@ -123,26 +114,23 @@
         android:layout_height="60dp"
         android:layout_above="@+id/tv_one_song_current_time"
         android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
-        >
-
-      
+        android:layout_alignParentLeft="true" >
 
         <LinearLayout
             android:id="@+id/ll_one_song_controller"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_marginBottom="8dp"
             android:layout_toRightOf="@+id/iv_display"
-            android:orientation="horizontal" 
-            android:layout_marginBottom="8dp">
+            android:orientation="horizontal" >
 
             <ImageView
                 android:id="@+id/iv_one_song_previous"
                 android:layout_width="0dp"
-                android:paddingTop="5dp"
-                android:paddingBottom="5dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
+                android:paddingBottom="5dp"
+                android:paddingTop="5dp"
                 android:src="@drawable/pervious" />
 
             <ImageView
@@ -155,14 +143,32 @@
             <ImageView
                 android:id="@+id/iv_one_song_next"
                 android:layout_width="0dp"
-                android:paddingTop="5dp"
-                 android:paddingBottom="5dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
+                android:paddingBottom="5dp"
+                android:paddingTop="5dp"
                 android:src="@drawable/next" />
+
+            <ImageView
+                android:id="@+id/loopmode"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.4"
+                android:layout_marginRight="10dp"
+                android:src="@drawable/loop" />
+
         </LinearLayout>
     </RelativeLayout>
 
-    
+    <TextView
+        android:id="@+id/tv_one_song_duration"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/tv_one_song_current_time"
+        android:layout_alignBottom="@+id/tv_one_song_current_time"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="15dp"
+        android:text="03:14"
+        android:textColor="#87a412" />
 
 </RelativeLayout>

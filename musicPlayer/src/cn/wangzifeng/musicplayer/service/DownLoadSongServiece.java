@@ -79,7 +79,8 @@ public class DownLoadSongServiece extends IntentService{
 		NotificationManager manager=(NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
 		Builder builder=new Builder(this);
 		manager.cancel(id);
-		builder.setTicker(text).setContentInfo(text).setSmallIcon(R.drawable.download1);
+		builder.setTicker(text).setContentInfo(text).setSmallIcon(R.drawable.download1)
+		.setProgress(0, 0, false);
 		manager.notify(id, builder.build());
 	}
 

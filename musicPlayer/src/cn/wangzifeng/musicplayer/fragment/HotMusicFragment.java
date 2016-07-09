@@ -112,7 +112,7 @@ Log.i("s", "songs=null");
 					int position, long id) {
 				app=(PlaySongApplication) getActivity().getApplication();
 				app.setSongs(songs);
-				
+				app.motifyIsLocalPlay(false);
 				if(app.getPosition()==position){
 					if(songBinder.isPlaying()){
 						songBinder.stop();

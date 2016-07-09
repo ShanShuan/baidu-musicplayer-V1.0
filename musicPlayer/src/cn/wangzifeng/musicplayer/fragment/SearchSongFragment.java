@@ -54,6 +54,7 @@ public class SearchSongFragment extends Fragment{
 					int position, long id) {
 				app.setSongs(songs);
 				app.setPosition(position);
+				app.motifyIsLocalPlay(false);
 				final Song s=songs.get(position);
 				String song_id=s.getSong_id();
 				

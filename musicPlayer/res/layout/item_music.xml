@@ -6,41 +6,48 @@
     <TextView
         android:id="@+id/tv_title"
         android:layout_width="match_parent"
-        android:layout_height="26dp"
+        android:layout_height="44dp"
         android:text="title" 
+        android:textSize="16sp"
+        android:gravity="center_vertical"
         android:layout_toRightOf="@+id/iv_title"/>
 
     <TextView
         android:id="@+id/tv_duration"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="44dp"
         android:layout_alignParentRight="true"
-        android:text="00:00" />
+        android:text="00:00" 
+        android:gravity="center_vertical"/>
 
     <TextView
         android:id="@+id/tv_album"
         android:layout_width="wrap_content"
-        android:layout_height="20dp"
+        android:layout_height="32dp"
         android:layout_below="@+id/tv_title"
         android:text="tv"
+                android:gravity="center_vertical"
         android:layout_alignLeft="@+id/tv_title"
         android:textColor="#aaaaaa"
-        android:textSize="10sp" />
+        android:textSize="14sp" />
 
     <TextView
+        android:gravity="center_vertical"
         android:id="@+id/tv_artist"
         android:layout_width="wrap_content"
-        android:layout_height="20dp"
+        android:layout_height="32dp"
         android:layout_alignParentRight="true"
         android:layout_below="@+id/tv_title"
         android:layout_toRightOf="@+id/tv_album"
         android:text="tv"
+        android:paddingLeft="10dp"
         android:textColor="#aaaaaa"
-        android:textSize="10sp" />
+        android:textSize="14sp" />
     <cn.wangzifeng.musicplayer.ui.CircleImageView 
         android:id="@+id/iv_title"
-        android:layout_width="46dp"
-        android:layout_height="46dp"
-        android:src="@drawable/ic_launcher"/>
+        android:layout_margin="8dp"
+        android:layout_width="76dp"
+        android:layout_height="76dp"
+        android:src="@drawable/f"/>
 
 </RelativeLayout>

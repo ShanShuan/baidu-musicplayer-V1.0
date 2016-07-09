@@ -45,6 +45,9 @@ public class SongAdapter extends BaseAdapter {
 
 	@Override
 	public int getCount() {
+		if(songs.size()==0){
+			return 0;
+		}
 		return songs.size();
 	}
 

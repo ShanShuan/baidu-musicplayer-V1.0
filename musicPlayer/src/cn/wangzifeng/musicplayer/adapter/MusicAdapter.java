@@ -47,12 +47,12 @@ public class MusicAdapter extends BaseAdapter<Music>{
 		holder.tvDuration.setText(Comm.formatData(music.getDruration()));
 		holder.tvAlbum.setText("专辑："+music.getAlbum());
 		holder.tvArtist.setText("艺术家："+music.getArtist());
-		if(music.getAlbumArt()==null){
-			
-		}else{
-			Bitmap bm=BitmapFactory.decodeFile(music.getAlbumArt());
-			holder.imageView.setImageBitmap(bm);
-		}
+//		if(music.getAlbumArt()==null){
+//			
+//		}else{
+//			Bitmap bm=BitmapFactory.decodeFile(music.getAlbumArt());
+//			holder.imageView.setImageBitmap(bm);
+//		}
 		return convertView;
 	}
 	class ViewHolder{
